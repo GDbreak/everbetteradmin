@@ -21,10 +21,10 @@
     <Generator>MSBuild:Compile</Generator>
     <SubType>Designer</SubType>
   </ApplicationDefinition>
-  <Page Include="LoginWindow.xaml">
+  <Page Include="View\LoginWindow.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
-  <Page Include="MainWindow.xaml">
+  <Page Include="View\MainWindow.xaml">
     <Generator>MSBuild:Compile</Generator>
     <SubType>Designer</SubType>
   </Page>
@@ -33,8 +33,10 @@
     <SubType>Code</SubType>
   </Compile>
   <Compile Include="Helpers\BaseViewModel.cs" />
-  <Compile Include="LoginWindow.xaml.cs" />
-  <Compile Include="MainWindow.xaml.cs">
+  <Compile Include="ViewModel\LoginWindowViewModel.cs" />
+  <Compile Include="ViewModel\MainWindowViewModel.cs" />
+  <Compile Include="View\LoginWindow.xaml.cs" />
+  <Compile Include="View\MainWindow.xaml.cs">
     <DependentUpon>MainWindow.xaml</DependentUpon>
     <SubType>Code</SubType>
   </Compile>
@@ -103,6 +105,9 @@
     <Resource Include="Fonts\Jost-VariableFont_wght.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Content Include="Images\everbetter_logo_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\everbetter_logo_2_fMN_icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -116,6 +121,10 @@
   
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using Auth0.OidcClient;
 using EverBetterAdminApp.Helpers;
 using EverBetterAdminApp.Services;
+using EverBetterAdminApp.ViewModel;
 using IdentityModel.OidcClient;
 using System;
 using System.Collections.Generic;
@@ -17,29 +18,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace EverBetterAdminApp
+namespace EverBetterAdminApp.View
 {
-    public class LoginWindowViewModel : BaseViewModel
+
+    public partial class LoginWindow : Window
     {
+        private LoginWindowViewModel viewModel;
 
-
-        public LoginWindowViewModel()
-        {
-
-
-        }
-    }
-		public partial class LoginWindow : Window
-    {
         public LoginWindow()
         {
             InitializeComponent();
+            viewModel = (LoginWindowViewModel)base.DataContext;
             DataContext = ((App)Application.Current).oAuthService;
         }
 
         private async void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWnd = null;
+            LoginBtn.IsEnabled = false;
+            LoginBtn.Content = "Please wait...";
 
             bool result = await ((App)Application.Current).oAuthService.Login();
 
@@ -49,6 +46,11 @@ namespace EverBetterAdminApp
                 Application.Current.MainWindow = mainWnd;
                 mainWnd.Show();
                 this.Close();
+            }
+            else
+            {
+                LoginBtn.IsEnabled = true;
+                LoginBtn.Content = "Log In";
             }
         }
     }

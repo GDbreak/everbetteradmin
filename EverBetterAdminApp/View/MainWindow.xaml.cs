@@ -1,5 +1,7 @@
 ﻿using EverBetterAdminApp.Helpers;
 using EverBetterAdminApp.Services;
+using EverBetterAdminApp.View;
+using EverBetterAdminApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,35 +14,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DataAccess;
+using DataAccess.Models;
 
-namespace EverBetterAdminApp
+namespace EverBetterAdminApp.View
 {
-    public class MainWindowViewModel : BaseViewModel
-    {
-        #region Data Members
-        private OAuthService _oAuthService;
-        #endregion
-        #region Constructors
-        public MainWindowViewModel()
-        {
-            _oAuthService = ((App)Application.Current).oAuthService;
-        }
-        #endregion
-        #region Properties
-        public OAuthService service
-        {
-            get
-            {
-                return _oAuthService;
-            }
-        }
-        #endregion
-    }
+ 
     public partial class MainWindow : Window
     {
         #region DataMembers
 
         private MainWindowViewModel viewModel;
+        private OAuthService oAuthService;
 
         #endregion
 
@@ -49,7 +34,8 @@ namespace EverBetterAdminApp
         {
             InitializeComponent();
             viewModel = (MainWindowViewModel)base.DataContext;
-            Welcometxt.Text = "Welcome " + viewModel.service.userName;
+            oAuthService = ((App)Application.Current).oAuthService;
+
         }
         #endregion
 
@@ -58,7 +44,9 @@ namespace EverBetterAdminApp
         {
             LoginWindow loginWnd = null;
 
-            bool result = await((App)Application.Current).oAuthService.Logout();
+            Logoutbtn.Content = "Signing out...";
+
+            bool result = await oAuthService.Logout();
 
             if (result)
             {
@@ -67,12 +55,31 @@ namespace EverBetterAdminApp
                 loginWnd.Show();
                 this.Close();
             }
+            else
+            {
+                Logoutbtn.IsEnabled = true;
+                Logoutbtn.Content = "Log Out";
+            }
         }
-        #endregion
 
-        private void RadGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
+
+        private async void SearchUsersbtn_Click(object sender, RoutedEventArgs e)
         {
 
+            using(DataAccessService das = new DataAccessService(oAuthService.identityToken) )
+            {
+                IEnumerable<UsersResource> users = await das.GetUsers();
+                foreach (var user in users)
+                {
+
+                }
+            }
+
+
         }
+
+        #endregion
+
+
     }
 }
