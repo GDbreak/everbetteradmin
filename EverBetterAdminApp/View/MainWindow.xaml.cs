@@ -66,7 +66,7 @@ namespace EverBetterAdminApp.View
         private async void SearchUsersbtn_Click(object sender, RoutedEventArgs e)
         {
 
-            using(DataAccessService das = new DataAccessService(oAuthService.identityToken) )
+            using(DataAccessService das = new DataAccessService(oAuthService.accessToken) )
             {
                 IEnumerable<UsersResource> users = await das.GetUsers();
                 foreach (var user in users)

@@ -160,7 +160,7 @@ namespace EverBetterAdminApp.Services
 
             string domain = ConfigurationManager.AppSettings["Auth0:Domain"];
             string clientId = ConfigurationManager.AppSettings["Auth0:ClientId"];
-
+            string _audience = ConfigurationManager.AppSettings["Auth0:Audience"];
             client = new Auth0Client(new Auth0ClientOptions
             {
                 Domain = domain,
@@ -168,7 +168,7 @@ namespace EverBetterAdminApp.Services
                 Browser = new WebViewBrowserChromium()
             });
 
-            LoginResult login = await client.LoginAsync();
+            LoginResult login = await client.LoginAsync(new { audience = _audience});
             if (login.AccessToken != null)
             {
                 accessToken = login.AccessToken;
