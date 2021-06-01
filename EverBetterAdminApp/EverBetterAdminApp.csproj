@@ -21,6 +21,9 @@
     <Generator>MSBuild:Compile</Generator>
     <SubType>Designer</SubType>
   </ApplicationDefinition>
+  <Page Include="View\ClinicianAssignmentWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
   <Page Include="View\LoginWindow.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
@@ -33,8 +36,10 @@
     <SubType>Code</SubType>
   </Compile>
   <Compile Include="Helpers\BaseViewModel.cs" />
+  <Compile Include="ViewModel\ClinicianAssignmentViewModel.cs" />
   <Compile Include="ViewModel\LoginWindowViewModel.cs" />
   <Compile Include="ViewModel\MainWindowViewModel.cs" />
+  <Compile Include="View\ClinicianAssignmentWindow.xaml.cs" />
   <Compile Include="View\LoginWindow.xaml.cs" />
   <Compile Include="View\MainWindow.xaml.cs">
     <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -115,6 +120,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\everbetter_logo_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Profile1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

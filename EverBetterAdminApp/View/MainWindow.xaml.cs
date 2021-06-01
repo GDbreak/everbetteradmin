@@ -65,21 +65,55 @@ namespace EverBetterAdminApp.View
 
         private async void SearchUsersbtn_Click(object sender, RoutedEventArgs e)
         {
+            SearchUsersbtn.IsEnabled = false;
 
-            using(DataAccessService das = new DataAccessService(oAuthService.accessToken) )
-            {
-                IEnumerable<UsersResource> users = await das.GetUsers();
-                foreach (var user in users)
-                {
+             await viewModel.GetCustomersWithoutClinicians();
 
-                }
-            }
-
+            SearchUsersbtn.IsEnabled = true;
 
         }
 
+        private async void SearchManageUsersbtn_Click(object sender, RoutedEventArgs e)
+        {
+            SearchManageUsersbtn.IsEnabled = false;
+
+            await viewModel.GetUsers();
+
+            SearchManageUsersbtn.IsEnabled = true;
+
+        }
+
+        private void CustomerListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ClinicianAssignmentWindow wnd = null;
+
+            if (CustomerListView.SelectedItems.Count < 1)
+                return;
+
+            UsersResource ur = (UsersResource)CustomerListView.SelectedItems[0];
+            wnd = new ClinicianAssignmentWindow(ur.UsersID);
+            wnd.Owner = this;
+            wnd.ShowDialog();
+        }
+
+
+        private void ManageUsersListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ClinicianAssignmentWindow wnd = null;
+
+            if (CustomerListView.SelectedItems.Count < 1)
+                return;
+
+            UsersResource ur = (UsersResource)CustomerListView.SelectedItems[0];
+            wnd = new ClinicianAssignmentWindow(ur.UsersID);
+            wnd.Owner = this;
+            wnd.ShowDialog();
+        }
         #endregion
 
-
+        private async void LoadSurveyPagebtn_Click(object sender, RoutedEventArgs e)
+        {
+            await viewModel.GetSurveyPages();
+        }
     }
 }

@@ -7,6 +7,9 @@
     <Window.DataContext>
         <viewmodel:MainWindowViewModel />
     </Window.DataContext>
+    <Window.Resources>
+        <BitmapImage x:Key="EverBetterProfilePicture" UriSource="/EverBetterAdminApp;component/Images/Profile1.png" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -18,18 +21,152 @@
         </ToolBar>
         <telerik:RadTabControl x:Name="TabControl" Margin="0,34, 0, 0">
             <telerik:RadTabItem Header="Change Survey Questions">
+                <StackPanel>
+                    <Button Name="LoadSurveyPagebtn" Content="Load Survey Page Data" Click="LoadSurveyPagebtn_Click"/>
+                    <Button Name="SaveSurveybtn" Content="Save Survey" />
+                    <telerik:RadGridView   MaxHeight="460" RowDetailsVisibilityMode="VisibleWhenSelected"  GroupRenderMode="Flat" AutoGenerateColumns="False" ItemsSource="{Binding SurveyPageDetails}">
+                        <telerik:RadGridView.Columns>
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding Header}" IsReadOnly="True" Header="Page Header"/>
+                            <telerik:GridViewDataColumn DataMemberBinding="{Binding SortOrder}" IsReadOnly="True" Header="Sort Order"/>
+                        </telerik:RadGridView.Columns>
+                        <telerik:RadGridView.RowDetailsTemplate>
+                            <DataTemplate>
+                                <telerik:RadGridView RowDetailsVisibilityMode="VisibleWhenSelected" Name="SurveyQuestionsGrid"  
+                                 ItemsSource="{Binding Survey_Questions}"  
+                                 AutoGenerateColumns="False" 
+                                 MaxHeight="1000">
+                                    <telerik:RadGridView.Columns>
+                                        <telerik:GridViewDataColumn DataMemberBinding="{Binding Details}" IsReadOnly="True" Header="Place Holder"/>
+                                    </telerik:RadGridView.Columns>
+
+                                    <telerik:RadGridView.RowDetailsTemplate>
+                                        <DataTemplate>
+                                            <telerik:RadGridView Name="SurveyResponsesGridView"  
+                                 ItemsSource="{Binding Survey_Responses}"  
+                                 AutoGenerateColumns="False" 
+                                 MaxHeight="1000">
+                                                <telerik:RadGridView.Columns>
+                                                    <telerik:GridViewDataColumn DataMemberBinding="{Binding ResponseText}" IsReadOnly="True" Header="Response"/>
+                                                </telerik:RadGridView.Columns>
+                                            </telerik:RadGridView>
+                                        </DataTemplate>
+                                    </telerik:RadGridView.RowDetailsTemplate>
+
+                                </telerik:RadGridView>
+                            </DataTemplate>
+                        </telerik:RadGridView.RowDetailsTemplate>
+
+                    </telerik:RadGridView>
+                    
+            </StackPanel>
             </telerik:RadTabItem>
             <telerik:RadTabItem Header="Manage Users">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" >
-                    <TextBlock Padding="5, 0, 5, 0" TextAlignment="Center" Text="Username:"></TextBlock>
-                    <Rectangle HorizontalAlignment="Left" Margin="10,0,10,0" Width="1" Stroke="White"/>
-                    <TextBox   Width="200"></TextBox>
-                    <Rectangle HorizontalAlignment="Left" Margin="10,0,10,0" Width="1" Stroke="White"/>
-                    <Button   Name="SearchUsersbtn" Content="Click to Search" Click="SearchUsersbtn_Click"/>
-                </StackPanel>
+                <Grid Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left" Width="800" VerticalAlignment="Top" Height="20" >
+                        <TextBlock Padding="5, 0, 5, 0" TextAlignment="Center" Text="Filter by Name:"></TextBlock>
+                        <Rectangle HorizontalAlignment="Left" Margin="5,0,10,0" Width="1" Stroke="White"/>
+                        <TextBox   Width="200"></TextBox>
+                        <Rectangle HorizontalAlignment="Left" Margin="10,0,10,0" Width="1" Stroke="White"/>
+                        <TextBlock Text="Filter by State: "/>
+                        <Rectangle HorizontalAlignment="Left" Margin="10,0,10,0" Width="1" Stroke="White"/>
+                        <telerik:RadComboBox>
+                            <telerik:RadComboBoxItem Content="ALL"></telerik:RadComboBoxItem>
+                            <telerik:RadComboBoxItem Content="NY"></telerik:RadComboBoxItem>
+                            <telerik:RadComboBoxItem Content="NJ"></telerik:RadComboBoxItem>
+                        </telerik:RadComboBox>
+                        <Rectangle HorizontalAlignment="Left" Margin="10,0,10,0" Width="1" Stroke="White"/>
+                        <Button  HorizontalAlignment="Right" Name="SearchManageUsersbtn" Content="Click to Search" Click="SearchManageUsersbtn_Click"/>
+                    </StackPanel>
 
+                    <ListView MouseDoubleClick="ManageUsersListView_MouseDoubleClick" Grid.ColumnSpan="3" Name="ManageUsersListView" ItemsSource="{Binding users}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,20,0,0" HorizontalContentAlignment="Stretch">
+                        <ListView.ItemTemplate>
+                            <DataTemplate >
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Width="125" Height="125" MaxWidth="125" MaxHeight="125" Source="{Binding Path=ProfilePictureURL, TargetNullValue = {StaticResource EverBetterProfilePicture}}">
+                                    </Image>
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="18" Text="Full Name: "></TextBlock>
+                                            <TextBlock FontSize="18" Name="FirstNametxt" Text="{Binding Path=FirstName}" Grid.ColumnSpan="3"/>
+                                            <TextBlock FontSize="18" Text=" "/>
+                                            <TextBlock FontSize="18"  Name="LastNametxt" Text="{Binding Path=LastName}" Grid.ColumnSpan="3"/>
+                                        </StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock FontSize="12" Text="State: " Grid.Column="1"/>
+                                            <TextBlock Name="Statetxt" Text="{Binding Path=StateAbbreviation}" Grid.Column="1"/>
+                                            <TextBlock Name="ZipCodetxt" Text="{Binding Path=ZipCode}" Grid.Column="2"/>
+                                            <TextBlock Name="Gendertxt" Text="{Binding Path=Gender}" Grid.Column="3"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
             </telerik:RadTabItem>
             <telerik:RadTabItem Header="Match Patients to Clinicians">
+                <Grid Margin="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Left" Width="800" VerticalAlignment="Top" Height="20" >
+                        <TextBlock Padding="5, 0, 5, 0" TextAlignment="Center" Text="Filter by Name:"></TextBlock>
+                        <Rectangle HorizontalAlignment="Left" Margin="5,0,10,0" Width="1" Stroke="White"/>
+                        <TextBox   Width="200"></TextBox>
+                        <Rectangle HorizontalAlignment="Left" Margin="10,0,10,0" Width="1" Stroke="White"/>
+                        <TextBlock Text="Filter by State: "/>
+                        <Rectangle HorizontalAlignment="Left" Margin="10,0,10,0" Width="1" Stroke="White"/>
+                        <telerik:RadComboBox>
+                            <telerik:RadComboBoxItem Content="ALL"></telerik:RadComboBoxItem>
+                            <telerik:RadComboBoxItem Content="NY"></telerik:RadComboBoxItem>
+                            <telerik:RadComboBoxItem Content="NJ"></telerik:RadComboBoxItem>
+                        </telerik:RadComboBox>
+                        <Rectangle HorizontalAlignment="Left" Margin="10,0,10,0" Width="1" Stroke="White"/>
+                        <Button  HorizontalAlignment="Right" Name="SearchUsersbtn" Content="Click to Search" Click="SearchUsersbtn_Click"/>
+                    </StackPanel>
+
+                    <ListView MouseDoubleClick="CustomerListView_MouseDoubleClick" Grid.ColumnSpan="3" Name="CustomerListView" ItemsSource="{Binding customersWithoutClinicians}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,20,0,0" HorizontalContentAlignment="Stretch">
+                        <ListView.ItemTemplate>
+                            <DataTemplate >
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Width="125" Height="125" MaxWidth="125" MaxHeight="125" Source="{Binding Path=ProfilePictureURL, TargetNullValue = {StaticResource EverBetterProfilePicture}}">
+                                    </Image>
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontSize="18" Text="Full Name: "></TextBlock>
+                                            <TextBlock FontSize="18" Name="FirstNametxt" Text="{Binding Path=FirstName}" Grid.ColumnSpan="3"/>
+                                            <TextBlock FontSize="18" Text=" "/>
+                                            <TextBlock FontSize="18"  Name="LastNametxt" Text="{Binding Path=LastName}" Grid.ColumnSpan="3"/>
+                                        </StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock FontSize="12" Text="State: " Grid.Column="1"/>
+                                            <TextBlock Name="Statetxt" Text="{Binding Path=StateAbbreviation}" Grid.Column="1"/>
+                                            <TextBlock Name="ZipCodetxt" Text="{Binding Path=ZipCode}" Grid.Column="2"/>
+                                            <TextBlock Name="Gendertxt" Text="{Binding Path=Gender}" Grid.Column="3"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
             </telerik:RadTabItem>
         </telerik:RadTabControl>
 

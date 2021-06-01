@@ -14,7 +14,7 @@ namespace DataAccess.Models
         /// <summary>
         /// The GUID for the user.
         /// </summary>
-        public Guid UsersID { get; private set; }
+        public Guid UsersID { get; set; }
 
         /// <summary>
         /// The OAuth ID for the user.
@@ -81,6 +81,6 @@ namespace DataAccess.Models
         /// The date and time the object was created.
         /// </summary>
         [DataType(DataType.DateTime)]
-        public DateTime CreatedDateTime { get; private set; }
+        public DateTime CreatedDateTime { get; set; }
     }
 }

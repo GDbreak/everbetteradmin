@@ -34,6 +34,6 @@ namespace DataAccess.Models
         /// <summary>
         /// The survey questions that appear in the survey page.
         /// </summary>
-        public IEnumerable<Survey_QuestionResource> Survey_Questions { get; set; }
+        public IEnumerable<Survey_QuestionDetailsResource> Survey_Questions { get; set; }
     }
 }
