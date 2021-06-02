@@ -31,12 +31,16 @@
     <Generator>MSBuild:Compile</Generator>
     <SubType>Designer</SubType>
   </Page>
+  <Page Include="View\EditSurveyPageWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
   <Compile Include="App.xaml.cs">
     <DependentUpon>App.xaml</DependentUpon>
     <SubType>Code</SubType>
   </Compile>
   <Compile Include="Helpers\BaseViewModel.cs" />
   <Compile Include="ViewModel\ClinicianAssignmentViewModel.cs" />
+  <Compile Include="ViewModel\EditSurveyPageViewModel.cs" />
   <Compile Include="ViewModel\LoginWindowViewModel.cs" />
   <Compile Include="ViewModel\MainWindowViewModel.cs" />
   <Compile Include="View\ClinicianAssignmentWindow.xaml.cs" />
@@ -47,6 +51,7 @@
   </Compile>
   <Compile Include="Helpers\WebViewBrowserChromium.cs" />
   <Compile Include="Services\OAuthService.cs" />
+  <Compile Include="View\EditSurveyPageWindow.xaml.cs" />
 </ItemGroup>
   
   <ItemGroup>

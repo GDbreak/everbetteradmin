@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DataAccess;
 using DataAccess.Models;
+using Telerik.Windows.Controls;
 
 namespace EverBetterAdminApp.View
 {
@@ -26,7 +27,8 @@ namespace EverBetterAdminApp.View
 
         private MainWindowViewModel viewModel;
         private OAuthService oAuthService;
-
+        private RadGridView questionRowDetails;
+        private RadGridView responseRowDetails;
         #endregion
 
         #region Constructors
@@ -113,7 +115,81 @@ namespace EverBetterAdminApp.View
 
         private async void LoadSurveyPagebtn_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = (Button)sender;
+
+            btn.IsEnabled = false;
+            btn.Content = "Loading...";
+
             await viewModel.GetSurveyPages();
+
+
+            btn.Content = "Loaded...";
+        }
+
+        private void EditPageContext_Click(object sender, Telerik.Windows.RadRoutedEventArgs e)
+        {
+            if (SurveyPageGV.SelectedItem == null)
+            {
+                MessageBox.Show("No survey pages were selected.");
+                return;
+            }
+
+            Survey_PageDetailsResource spdr = (Survey_PageDetailsResource)SurveyPageGV.SelectedItem;
+            EditSurveyPageWindow wnd = new EditSurveyPageWindow(spdr.Survey_PageID);
+            wnd.Owner = this;
+            wnd.ShowDialog();
+        }
+
+        private void EditQuestionContext_Click(object sender, Telerik.Windows.RadRoutedEventArgs e)
+        {
+            if (questionRowDetails == null || questionRowDetails.SelectedItem == null)
+            {
+                MessageBox.Show("No survey questions were selected.");
+                return;
+            }
+
+            Survey_QuestionDetailsResource sqdr = (Survey_QuestionDetailsResource)questionRowDetails.SelectedItem;
+            EditSurveyPageWindow wnd = new EditSurveyPageWindow(sqdr.Survey_QuestionID);
+            wnd.Owner = this;
+            wnd.ShowDialog();
+        }
+        
+        private void EditResponseContext_Click(object sender, Telerik.Windows.RadRoutedEventArgs e)
+        {
+            if (responseRowDetails == null || responseRowDetails.SelectedItem == null)
+            {
+                MessageBox.Show("No survey responses were selected.");
+                return;
+            }
+
+            Survey_ResponseResource srr = (Survey_ResponseResource)responseRowDetails.SelectedItem;
+            EditSurveyPageWindow wnd = new EditSurveyPageWindow((int)srr.Survey_ResponseID);
+            wnd.Owner = this;
+            wnd.ShowDialog();
+        }
+
+        private void SurveyPageGV_RowDetailsVisibilityChanged(object sender, Telerik.Windows.Controls.GridView.GridViewRowDetailsEventArgs e)
+        {
+
+            if (e.Visibility == Visibility.Visible)
+            {
+
+                questionRowDetails = e.DetailsElement.FindName("SurveyQuestionsGV") as RadGridView;
+
+            }
+    
+        }
+
+        private void SurveyQuestionsGV_RowDetailsVisibilityChanged(object sender, Telerik.Windows.Controls.GridView.GridViewRowDetailsEventArgs e)
+        {
+
+            if (e.Visibility == Visibility.Visible)
+            {
+
+                responseRowDetails = e.DetailsElement.FindName("SurveyResponsesGV") as RadGridView;
+
+            }
+
         }
     }
 }

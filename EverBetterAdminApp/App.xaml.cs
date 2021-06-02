@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using Telerik.Windows.Controls;
 
 namespace EverBetterAdminApp
 {
@@ -22,7 +23,8 @@ namespace EverBetterAdminApp
         #region Constructors
         public App()
         {
-           this.InitializeComponent();
+            StyleManager.ApplicationTheme = new Telerik.Windows.Controls.Office2016Theme();
+            this.InitializeComponent();
             _oAuthService = new OAuthService();
         }
         #endregion

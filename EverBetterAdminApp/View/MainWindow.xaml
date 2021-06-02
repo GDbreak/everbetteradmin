@@ -19,32 +19,48 @@
             <TextBlock x:Name="Welcometxt" Text="{Binding service.userName}" Width="160" VerticalAlignment="Center" />
             <Button Content="Log Out" Click="Logoutbtn_Click"  x:Name="Logoutbtn" VerticalAlignment="Center" HorizontalAlignment="Right" Height="22"/>
         </ToolBar>
+
         <telerik:RadTabControl x:Name="TabControl" Margin="0,34, 0, 0">
             <telerik:RadTabItem Header="Change Survey Questions">
                 <StackPanel>
                     <Button Name="LoadSurveyPagebtn" Content="Load Survey Page Data" Click="LoadSurveyPagebtn_Click"/>
-                    <Button Name="SaveSurveybtn" Content="Save Survey" />
-                    <telerik:RadGridView   MaxHeight="460" RowDetailsVisibilityMode="VisibleWhenSelected"  GroupRenderMode="Flat" AutoGenerateColumns="False" ItemsSource="{Binding SurveyPageDetails}">
+                    <telerik:RadGridView RowDetailsVisibilityChanged="SurveyPageGV_RowDetailsVisibilityChanged"   ShowGroupPanel="False" Name="SurveyPageGV"  MaxHeight="460" RowDetailsVisibilityMode="VisibleWhenSelected"  CanUserGroupColumns="False"  GroupRenderMode="Flat" IsFilteringAllowed="False" AutoGenerateColumns="False" ItemsSource="{Binding SurveyPageDetails}">
+                        <telerik:RadContextMenu.ContextMenu>
+                            <telerik:RadContextMenu Name="PageContextMenu">
+                                <telerik:RadMenuItem Name="EditPageContext" Header="Edit Page" Click="EditPageContext_Click" />
+                            </telerik:RadContextMenu>
+                        </telerik:RadContextMenu.ContextMenu>
+                        
                         <telerik:RadGridView.Columns>
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding Header}" IsReadOnly="True" Header="Page Header"/>
                             <telerik:GridViewDataColumn DataMemberBinding="{Binding SortOrder}" IsReadOnly="True" Header="Sort Order"/>
                         </telerik:RadGridView.Columns>
                         <telerik:RadGridView.RowDetailsTemplate>
                             <DataTemplate>
-                                <telerik:RadGridView RowDetailsVisibilityMode="VisibleWhenSelected" Name="SurveyQuestionsGrid"  
-                                 ItemsSource="{Binding Survey_Questions}"  
+                                <telerik:RadGridView IsFilteringAllowed="False"  ShowGroupPanel="False" RowDetailsVisibilityMode="VisibleWhenSelected" Name="SurveyQuestionsGV"  
+                                 ItemsSource="{Binding Survey_Questions}"  CanUserGroupColumns="False" RowDetailsVisibilityChanged="SurveyQuestionsGV_RowDetailsVisibilityChanged"   
                                  AutoGenerateColumns="False" 
                                  MaxHeight="1000">
+                                    <telerik:RadContextMenu.ContextMenu>
+                                        <telerik:RadContextMenu Name="QuestionContextMenu">
+                                            <telerik:RadMenuItem Name="EditQuestionContext" Header="Edit Question" Click="EditQuestionContext_Click" />
+                                        </telerik:RadContextMenu>
+                                    </telerik:RadContextMenu.ContextMenu>
                                     <telerik:RadGridView.Columns>
                                         <telerik:GridViewDataColumn DataMemberBinding="{Binding Details}" IsReadOnly="True" Header="Place Holder"/>
                                     </telerik:RadGridView.Columns>
 
                                     <telerik:RadGridView.RowDetailsTemplate>
                                         <DataTemplate>
-                                            <telerik:RadGridView Name="SurveyResponsesGridView"  
+                                            <telerik:RadGridView x:Name="SurveyResponsesGV"  ShowGroupPanel="False"  CanUserGroupColumns="False" IsFilteringAllowed="False"
                                  ItemsSource="{Binding Survey_Responses}"  
                                  AutoGenerateColumns="False" 
                                  MaxHeight="1000">
+                                                <telerik:RadContextMenu.ContextMenu>
+                                                    <telerik:RadContextMenu Name="ResponseContextMenu">
+                                                        <telerik:RadMenuItem Name="EditResponseContext" Header="Edit Response" Click="EditResponseContext_Click" />
+                                                    </telerik:RadContextMenu>
+                                                </telerik:RadContextMenu.ContextMenu>
                                                 <telerik:RadGridView.Columns>
                                                     <telerik:GridViewDataColumn DataMemberBinding="{Binding ResponseText}" IsReadOnly="True" Header="Response"/>
                                                 </telerik:RadGridView.Columns>
