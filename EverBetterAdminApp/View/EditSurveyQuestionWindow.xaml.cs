@@ -14,14 +14,14 @@ using System.Windows.Shapes;
 namespace EverBetterAdminApp.View
 {
 
-    public partial class EditSurveyPageWindow : Window
+    public partial class EditSurveyQuestionWindow : Window
     {
 
-        private EditSurveyPageViewModel viewModel;
-        public EditSurveyPageWindow(int survey_PageId)
+        private EditSurveyQuestionViewModel viewModel;
+        public EditSurveyQuestionWindow(int survey_QuestionId)
         {
             InitializeComponent();
-            viewModel = (EditSurveyPageViewModel)base.DataContext;
+            viewModel = (EditSurveyQuestionViewModel)base.DataContext;
         }
     }
 }

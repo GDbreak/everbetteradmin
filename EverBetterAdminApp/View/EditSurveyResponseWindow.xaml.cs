@@ -13,15 +13,17 @@ using System.Windows.Shapes;
 
 namespace EverBetterAdminApp.View
 {
-
-    public partial class EditSurveyPageWindow : Window
+    /// <summary>
+    /// Interaction logic for Window1.xaml
+    /// </summary>
+    public partial class EditSurveyResponseWindow : Window
     {
 
-        private EditSurveyPageViewModel viewModel;
-        public EditSurveyPageWindow(int survey_PageId)
+        private EditSurveyResponseViewModel viewModel;
+        public EditSurveyResponseWindow(int survey_ResponseId)
         {
             InitializeComponent();
-            viewModel = (EditSurveyPageViewModel)base.DataContext;
+            viewModel = (EditSurveyResponseViewModel)base.DataContext;
         }
     }
 }

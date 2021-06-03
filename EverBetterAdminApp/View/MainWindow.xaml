@@ -24,7 +24,10 @@
             <telerik:RadTabItem Header="Change Survey Questions">
                 <StackPanel>
                     <Button Name="LoadSurveyPagebtn" Content="Load Survey Page Data" Click="LoadSurveyPagebtn_Click"/>
-                    <telerik:RadGridView RowDetailsVisibilityChanged="SurveyPageGV_RowDetailsVisibilityChanged"   ShowGroupPanel="False" Name="SurveyPageGV"  MaxHeight="460" RowDetailsVisibilityMode="VisibleWhenSelected"  CanUserGroupColumns="False"  GroupRenderMode="Flat" IsFilteringAllowed="False" AutoGenerateColumns="False" ItemsSource="{Binding SurveyPageDetails}">
+                    <Button Name="ManageAllResponsesbtn" Content="Manage All Survey Responses" Click="ManageAllResponsesbtn_Click"/>
+                    <Button Name="ManageAllQuestionsbtn" Content="Manage All Survey Questions" Click="ManageAllQuestionsbtn_Click"/>
+                    <Button Name="ManageAllPagesbtn" Content="Manage All Survey Pages" Click="ManageAllPagesbtn_Click" />
+                    <telerik:RadGridView RowDetailsVisibilityChanged="SurveyPageGV_RowDetailsVisibilityChanged"  MouseRightButtonUp="SurveyPageGV_MouseRightButtonDown"  ShowGroupPanel="False" Name="SurveyPageGV"  MaxHeight="460" RowDetailsVisibilityMode="VisibleWhenSelected"  CanUserGroupColumns="False"  GroupRenderMode="Flat" IsFilteringAllowed="False" AutoGenerateColumns="False" ItemsSource="{Binding SurveyPageDetails}">
                         <telerik:RadContextMenu.ContextMenu>
                             <telerik:RadContextMenu Name="PageContextMenu">
                                 <telerik:RadMenuItem Name="EditPageContext" Header="Edit Page" Click="EditPageContext_Click" />

@@ -123,7 +123,7 @@ namespace EverBetterAdminApp.View
             await viewModel.GetSurveyPages();
 
 
-            btn.Content = "Loaded...";
+            btn.Content = "Loaded";
         }
 
         private void EditPageContext_Click(object sender, Telerik.Windows.RadRoutedEventArgs e)
@@ -149,7 +149,7 @@ namespace EverBetterAdminApp.View
             }
 
             Survey_QuestionDetailsResource sqdr = (Survey_QuestionDetailsResource)questionRowDetails.SelectedItem;
-            EditSurveyPageWindow wnd = new EditSurveyPageWindow(sqdr.Survey_QuestionID);
+            EditSurveyQuestionWindow wnd = new EditSurveyQuestionWindow(sqdr.Survey_QuestionID);
             wnd.Owner = this;
             wnd.ShowDialog();
         }
@@ -163,7 +163,7 @@ namespace EverBetterAdminApp.View
             }
 
             Survey_ResponseResource srr = (Survey_ResponseResource)responseRowDetails.SelectedItem;
-            EditSurveyPageWindow wnd = new EditSurveyPageWindow((int)srr.Survey_ResponseID);
+            EditSurveyResponseWindow wnd = new EditSurveyResponseWindow((int)srr.Survey_ResponseID);
             wnd.Owner = this;
             wnd.ShowDialog();
         }
@@ -189,6 +189,44 @@ namespace EverBetterAdminApp.View
                 responseRowDetails = e.DetailsElement.FindName("SurveyResponsesGV") as RadGridView;
 
             }
+
+        }
+
+        private void SurveyPageGV_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DependencyObject dep = (DependencyObject)e.OriginalSource;
+            while ((dep != null) && !(dep is DataGridCell))
+            {
+                dep = VisualTreeHelper.GetParent(dep);
+            }
+            if (dep == null) return;
+
+            if (dep is DataGridCell)
+            {
+                DataGridCell cell = dep as DataGridCell;
+                cell.Focus();
+
+                while ((dep != null) && !(dep is DataGridRow))
+                {
+                    dep = VisualTreeHelper.GetParent(dep);
+                }
+                DataGridRow row = dep as DataGridRow;
+                SurveyPageGV.SelectedItem = row.DataContext;
+            }
+        }
+
+        private void ManageAllResponsesbtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ManageAllQuestionsbtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ManageAllPagesbtn_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

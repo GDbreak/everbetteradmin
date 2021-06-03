@@ -24,6 +24,18 @@
   <Page Include="View\ClinicianAssignmentWindow.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
+  <Page Include="View\ManageSurveyResponseWindow.xaml">
+    <SubType>Designer</SubType>
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="View\EditSurveyResponseWindow.xaml">
+    <SubType>Designer</SubType>
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="View\EditSurveyQuestionWindow.xaml">
+    <SubType>Designer</SubType>
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
   <Page Include="View\LoginWindow.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
@@ -40,10 +52,22 @@
   </Compile>
   <Compile Include="Helpers\BaseViewModel.cs" />
   <Compile Include="ViewModel\ClinicianAssignmentViewModel.cs" />
+  <Compile Include="ViewModel\ManageSurveyResponseViewModel.cs" />
+  <Compile Include="ViewModel\EditSurveyResponseViewModel.cs" />
+  <Compile Include="ViewModel\EditSurveyQuestionViewModel.cs" />
   <Compile Include="ViewModel\EditSurveyPageViewModel.cs" />
   <Compile Include="ViewModel\LoginWindowViewModel.cs" />
   <Compile Include="ViewModel\MainWindowViewModel.cs" />
   <Compile Include="View\ClinicianAssignmentWindow.xaml.cs" />
+  <Compile Include="View\ManageSurveyResponseWindow.xaml.cs">
+    <SubType>Code</SubType>
+  </Compile>
+  <Compile Include="View\EditSurveyResponseWindow.xaml.cs">
+    <SubType>Code</SubType>
+  </Compile>
+  <Compile Include="View\EditSurveyQuestionWindow.xaml.cs">
+    <SubType>Code</SubType>
+  </Compile>
   <Compile Include="View\LoginWindow.xaml.cs" />
   <Compile Include="View\MainWindow.xaml.cs">
     <DependentUpon>MainWindow.xaml</DependentUpon>
