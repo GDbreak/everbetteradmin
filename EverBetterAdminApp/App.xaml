@@ -5,13 +5,51 @@
              StartupUri="View/LoginWindow.xaml">
     <Application.Resources>
         <ResourceDictionary >
-            <FontFamily x:Key="Jost-Regular">pack://application:,,,/Fonts/#Jost-Regular.ttf</FontFamily>
-            <FontFamily x:Key="Jost-Bold">pack://application:,,,/Fonts/#Jost-Bold.ttf</FontFamily>
+            <FontFamily x:Key="JostBlack">pack://application:,,,/Fonts/#Jost Black</FontFamily>
+            <FontFamily x:Key="JostRegular">pack://application:,,,/Fonts/#Jost Regular</FontFamily>
+            <Color x:Key="Primary">#f37939</Color>
+            <Color x:Key="PrimaryText">#12172f</Color>
+            <Color x:Key="SeparatorLine">#f0f0f0</Color>
+            <LinearGradientBrush x:Key="OrangeBrush" 
+                                 StartPoint="1,0"
+                                 EndPoint="0,0">
+                <GradientStop Color="#F37939"
+                              Offset="0.1"/>
+                <GradientStop Color="#EE9524"
+                              Offset="1.0"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="PurpleBrush" 
+                                 StartPoint="1,0"
+                                 EndPoint="0,0">
+                <GradientStop Color="#32021F"
+                              Offset="0.1"/>
+                <GradientStop Color="#904E55"
+                              Offset="1.0"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="PurpleDiagonal" 
+                                 StartPoint="1,1"
+                                 EndPoint="0,0">
+                <GradientStop Color="#32021F"
+                              Offset="0.1"/>
+                <GradientStop Color="#904E55"
+                              Offset="1.0"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="BeigeDiagonal" 
+                                 StartPoint="1,1"
+                                 EndPoint="0,0">
+                <GradientStop Color="#DBD2C6"
+                              Offset="0.1"/>
+                <GradientStop Color="#F4F0E9"
+                              Offset="1.0"/>
+            </LinearGradientBrush>
             <Style x:Key="WinAll" TargetType="{x:Type Window}">
                 <Setter Property="FontSize"
             Value="14" />
                 <Setter Property="FontFamily"
-                    Value="Jost-Bold"/>
+                        Value="{StaticResource JostRegular}"></Setter>
+                </Style>
+            <Style x:Key="Button-" TargetType="{x:Type Button}">
+               
             </Style>
         </ResourceDictionary>
     </Application.Resources>

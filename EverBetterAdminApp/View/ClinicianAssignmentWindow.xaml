@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EverBetterAdminApp.View"
          xmlns:viewmodel="clr-namespace:EverBetterAdminApp.ViewModel"
         mc:Ignorable="d"
-        Title="Assign Clinician" Height="450" Width="800">
+        Title="Assign Clinician" Height="470" Width="800" Style="{StaticResource WinAll}">
     <Window.DataContext>
         <viewmodel:ClinicianAssignmentViewModel />
     </Window.DataContext>

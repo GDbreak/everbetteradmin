@@ -46,6 +46,9 @@ namespace EverBetterAdminApp.ViewModel
 
         #endregion
 
+        #region Methods
+
+        #endregion
 
     }
 

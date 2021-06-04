@@ -151,6 +151,9 @@
     <Content Include="Images\everbetter_logo_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\horizontallogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Profile1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

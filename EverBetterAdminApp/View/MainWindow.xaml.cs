@@ -217,7 +217,10 @@ namespace EverBetterAdminApp.View
 
         private void ManageAllResponsesbtn_Click(object sender, RoutedEventArgs e)
         {
+            ManageSurveyResponseWindow wnd = new ManageSurveyResponseWindow();
 
+            wnd.Owner = this;
+            wnd.ShowDialog();
         }
 
         private void ManageAllQuestionsbtn_Click(object sender, RoutedEventArgs e)

@@ -10,17 +10,40 @@
     <Window.Resources>
         <BitmapImage x:Key="EverBetterLogo" UriSource="/EverBetterAdminApp;component/Images/everbetter_logo_1.png" />
         <BitmapImage  x:Key="EverBetterText" UriSource="/EverBetterAdminApp;component/Images/EB_logo_text.png"  />
+        <BitmapImage  x:Key="EverBetterHorizontal" UriSource="/EverBetterAdminApp;component/Images/horizontallogo.png"  />
     </Window.Resources>
     <Window.DataContext>
         <viewmodel:LoginWindowViewModel />
     </Window.DataContext>
-    <Grid Background="#DBD2C6">
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="{StaticResource EverBetterLogo}" Width="200" Height="200" />
-        <Image Source="{StaticResource EverBetterText}"   />
-            </StackPanel>
-            <Button Click="LoginBtn_Click" IsDefault="True" FontFamily="{StaticResource Jost-Bold}"  FontSize="40" x:Name="LoginBtn" Content="Login" Width="500" Height="150"></Button>
+    <Grid Background="{StaticResource BeigeDiagonal }">
+        <StackPanel Orientation="Vertical" Width="700" HorizontalAlignment="Center">
+            <Rectangle Height="20">
+
+            </Rectangle>
+            <Image Source="{StaticResource EverBetterHorizontal}"   />
+            <Rectangle Height="40">
+                
+                </Rectangle>
+            <Button Click="LoginBtn_Click" IsDefault="True" BorderThickness="0" Background="{StaticResource OrangeBrush}" Foreground="White" 
+                    
+                    FontSize="40" x:Name="LoginBtn" Content="Login" Width="300" Height="100" >
+                <Button.Resources>
+                   
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="50" />
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+
+                    <Style>
+                        <Style.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Setter Property="Button.Background" Value="{StaticResource PurpleBrush}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

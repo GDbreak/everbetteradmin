@@ -25,7 +25,7 @@ namespace EverBetterAdminApp.View
         #endregion
 
         #region Constructors
-        public ManageSurveyResponseWindow(int survey_ResponseId)
+        public ManageSurveyResponseWindow()
         {
             InitializeComponent();
             viewModel = (ManageSurveyResponseViewModel)base.DataContext;
