@@ -24,21 +24,29 @@
             <Rectangle Height="40">
                 
                 </Rectangle>
-            <Button Click="LoginBtn_Click" IsDefault="True" BorderThickness="0" Background="{StaticResource OrangeBrush}" Foreground="White" 
-                    
+            <Button Click="LoginBtn_Click"  IsDefault="True" 
                     FontSize="40" x:Name="LoginBtn" Content="Login" Width="300" Height="100" >
                 <Button.Resources>
-                   
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="50" />
                     </Style>
                 </Button.Resources>
                 <Button.Style>
-
-                    <Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{StaticResource OrangeBrush}"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
                         <Style.Triggers>
                             <Trigger Property="Button.IsMouseOver" Value="True">
-                                <Setter Property="Button.Background" Value="{StaticResource PurpleBrush}" />
+                                <Setter Property="Background" Value="{StaticResource PurpleBrush}" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>

@@ -34,9 +34,11 @@ namespace EverBetterAdminApp.View
 
         private async void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
+
             MainWindow mainWnd = null;
             LoginBtn.IsEnabled = false;
             LoginBtn.Content = "Please wait...";
+            LoginBtn.Background = (Brush)Application.Current.TryFindResource("PurpleBrush");
 
             bool result = await ((App)Application.Current).oAuthService.Login();
 
@@ -49,6 +51,7 @@ namespace EverBetterAdminApp.View
             }
             else
             {
+                LoginBtn.Background = (Brush)Application.Current.TryFindResource("OrangeBrush");
                 LoginBtn.IsEnabled = true;
                 LoginBtn.Content = "Log In";
             }
