@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿
+using DataAccess;
 using DataAccess.Models;
 using EverBetterAdminApp.Helpers;
 using EverBetterAdminApp.Services;
@@ -13,15 +14,14 @@ namespace EverBetterAdminApp.ViewModel
     public class MainWindowViewModel : BaseViewModel
     {
         #region Data Members
-        private OAuthService _oAuthService;
         private IEnumerable<UsersResource> _customersWithoutClinicians;
         private IEnumerable<UsersResource> _users;
         private IEnumerable<Survey_PageDetailsResource> _surveyPageDetails;
         #endregion
         #region Constructors
-        public MainWindowViewModel()
+        public MainWindowViewModel() : base()
         {
-            _oAuthService = ((App)Application.Current).oAuthService;
+
         }
         #endregion
         #region Properties

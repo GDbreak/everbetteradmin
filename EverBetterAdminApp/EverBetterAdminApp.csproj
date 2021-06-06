@@ -24,6 +24,14 @@
   <Page Include="View\ClinicianAssignmentWindow.xaml">
     <Generator>MSBuild:Compile</Generator>
   </Page>
+  <Page Include="View\ManageSurveyPagesWindow.xaml">
+    <SubType>Designer</SubType>
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
+  <Page Include="View\ManageSurveyQuestionsWindow.xaml">
+    <SubType>Designer</SubType>
+    <Generator>MSBuild:Compile</Generator>
+  </Page>
   <Page Include="View\ManageSurveyResponseWindow.xaml">
     <SubType>Designer</SubType>
     <Generator>MSBuild:Compile</Generator>
@@ -52,6 +60,8 @@
   </Compile>
   <Compile Include="Helpers\BaseViewModel.cs" />
   <Compile Include="ViewModel\ClinicianAssignmentViewModel.cs" />
+  <Compile Include="ViewModel\ManageSurveyPagesViewModel.cs" />
+  <Compile Include="ViewModel\ManageSurveyQuestionsViewModel.cs" />
   <Compile Include="ViewModel\ManageSurveyResponseViewModel.cs" />
   <Compile Include="ViewModel\EditSurveyResponseViewModel.cs" />
   <Compile Include="ViewModel\EditSurveyQuestionViewModel.cs" />
@@ -59,6 +69,12 @@
   <Compile Include="ViewModel\LoginWindowViewModel.cs" />
   <Compile Include="ViewModel\MainWindowViewModel.cs" />
   <Compile Include="View\ClinicianAssignmentWindow.xaml.cs" />
+  <Compile Include="View\ManageSurveyPagesWindow.xaml.cs">
+    <SubType>Code</SubType>
+  </Compile>
+  <Compile Include="View\ManageSurveyQuestionsWindow.xaml.cs">
+    <SubType>Code</SubType>
+  </Compile>
   <Compile Include="View\ManageSurveyResponseWindow.xaml.cs">
     <SubType>Code</SubType>
   </Compile>

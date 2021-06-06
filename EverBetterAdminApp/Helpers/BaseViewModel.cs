@@ -1,7 +1,9 @@
-﻿using System;
+﻿using EverBetterAdminApp.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows;
 
 namespace EverBetterAdminApp.Helpers
 {
@@ -10,6 +12,7 @@ namespace EverBetterAdminApp.Helpers
 		#region INotifyPropertyChanged Data Members
 
 		public event PropertyChangedEventHandler PropertyChanged;
+		protected OAuthService _oAuthService;
 
 		#endregion
 
@@ -17,7 +20,7 @@ namespace EverBetterAdminApp.Helpers
 
 		public BaseViewModel()
 		{
-
+			_oAuthService = ((App)Application.Current).oAuthService;
 		}
 
 		#endregion
@@ -31,6 +34,7 @@ namespace EverBetterAdminApp.Helpers
 			if (handler != null)
 				handler(this, new PropertyChangedEventArgs(_propertyName));
 		}
+
 
 		#endregion
 	}

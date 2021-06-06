@@ -17,57 +17,57 @@ namespace EverBetterAdminApp.View
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class ManageSurveyResponseWindow : Window
+    public partial class ManageSurveyQuestionsWindow : Window
     {
         #region DataMembers
 
-        private ManageSurveyResponsesViewModel viewModel;
+        private ManageSurveyQuestionsViewModel viewModel;
         #endregion
 
         #region Constructors
-        public ManageSurveyResponseWindow()
+        public ManageSurveyQuestionsWindow()
         {
             InitializeComponent();
-            viewModel = (ManageSurveyResponsesViewModel)base.DataContext;
-            viewModel.GetAllSurveyResponses();
+            viewModel = (ManageSurveyQuestionsViewModel)base.DataContext;
+            viewModel.GetAllSurveyQuestions();
         }
 
         #endregion
 
         #region Events
 
-        private async void DeleteResponse_Click(object sender, RoutedEventArgs e)
+        private async void DeleteQuestion_Click(object sender, RoutedEventArgs e)
         {
 
             Button btn = (Button)sender;
             MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to delete " +
-                btn.DataContext.GetType().GetProperty("ResponseText").GetValue(btn.DataContext, null)
+                btn.DataContext.GetType().GetProperty("QuestionText").GetValue(btn.DataContext, null)
                 + "?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
             {
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
-                    await viewModel.DeleteSurveyResponse((long)btn.DataContext.GetType().GetProperty("Survey_ResponseID").GetValue(btn.DataContext, null));
+                    await viewModel.DeleteSurveyQuestion((long)btn.DataContext.GetType().GetProperty("Survey_QuestionID").GetValue(btn.DataContext, null));
                 }
             }
         }
 
-        private async void CreateResponse_Click(object sender, RoutedEventArgs e)
+        private async void CreateQuestion_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (Responsetxt.Text.Length > 0)
+                if (Questiontxt.Text.Length > 0)
                 {
-                    MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to add " + Responsetxt.Text + "?", "Create Confirmation", System.Windows.MessageBoxButton.YesNo);
+                    MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you want to add " + Questiontxt.Text + "?", "Create Confirmation", System.Windows.MessageBoxButton.YesNo);
                     {
                         if (messageBoxResult == MessageBoxResult.Yes)
 
-                            await viewModel.AddSurveyResponse(Responsetxt.Text);
+                            await viewModel.AddSurveyQuestion(Questiontxt.Text);
 
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Cannot add a blank response.");
+                    MessageBox.Show("Cannot add a blank Question.");
                 }
             }
 

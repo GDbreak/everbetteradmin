@@ -9,7 +9,7 @@ namespace EverBetterAdminApp.ViewModel
     {
 
 
-        public LoginWindowViewModel()
+        public LoginWindowViewModel() : base()
         {
 
 

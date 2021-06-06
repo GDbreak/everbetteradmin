@@ -12,16 +12,16 @@ namespace EverBetterAdminApp.ViewModel
 {
 
 
-    public class ManageSurveyResponsesViewModel : BaseViewModel
+    public class ManageSurveyPagesViewModel : BaseViewModel
     {
         #region DataMembers
-        private IEnumerable<Survey_ResponseResource> _survey_Responses;
+        private IEnumerable<Survey_PageResource> _survey_Pages;
 
         #endregion
 
         #region Constructors
 
-        public ManageSurveyResponsesViewModel() : base()
+        public ManageSurveyPagesViewModel() : base()
         {
 
         }
@@ -30,19 +30,19 @@ namespace EverBetterAdminApp.ViewModel
 
         #region Properties
 
-        public IEnumerable<Survey_ResponseResource> survey_Responses
+        public IEnumerable<Survey_PageResource> survey_Pages
         {
             get
             {
-                return _survey_Responses;
+                return _survey_Pages;
             }
             set
             {
-                if (value == _survey_Responses)
+                if (value == _survey_Pages)
                     return;
 
-                _survey_Responses = value;
-                raisePropertyChanged("survey_Responses");
+                _survey_Pages = value;
+                raisePropertyChanged("survey_Pages");
             }
         }
 
@@ -50,37 +50,37 @@ namespace EverBetterAdminApp.ViewModel
 
         #region Methods
 
-        public async Task GetAllSurveyResponses()
+        public async Task GetAllSurveyPages()
         {
 
             using (DataAccessService das = new DataAccessService(_oAuthService.accessToken))
             {
-                survey_Responses = await das.GetAllSurveyResponses();
+                survey_Pages = await das.GetAllSurveyPages();
                 return;
             }
         }
 
-        public async Task AddSurveyResponse(string survey_ResponseText)
+        public async Task AddSurveyPage(string survey_PageText)
         {
 
             using (DataAccessService das = new DataAccessService(_oAuthService.accessToken))
             {
-                Survey_ResponseResource srr = await das.AddSurveyResponse(survey_ResponseText);
-                MessageBox.Show("Successfully added " + srr.ResponseText);
+                Survey_PageResource srr = await das.AddSurveyPage(survey_PageText);
+                MessageBox.Show("Successfully added " + srr.Header);
                 
-                await GetAllSurveyResponses();
+                await GetAllSurveyPages();
                 return;
             }
         }
 
-        public async Task DeleteSurveyResponse(long survey_ResponseId)
+        public async Task DeleteSurveyPage(long survey_PageId)
         {
 
             using (DataAccessService das = new DataAccessService(_oAuthService.accessToken))
             {
-                Survey_ResponseResource srr = await das.DeleteSurveyResponse(survey_ResponseId);
-                MessageBox.Show("Successfully deleted " + srr.ResponseText);
-                await GetAllSurveyResponses();
+                Survey_PageResource srr = await das.DeleteSurveyPage(survey_PageId);
+                MessageBox.Show("Successfully deleted " + srr.Header);
+                await GetAllSurveyPages();
                 return;
             }
         }

@@ -12,16 +12,18 @@ namespace EverBetterAdminApp.ViewModel
 {
     public class ClinicianAssignmentViewModel : BaseViewModel
     {
-        private OAuthService _oAuthService;
+        #region DataMembers
+
         private IEnumerable<Users_ResponseResource> _users_Responses;
         private CustomerDetailsResource _customerDetailsResource;
         private IEnumerable<ClinicianResource> _matchedClinicians;
         private ClinicianDetailsResource _clinicianDetailsResource;
 
+        #endregion
+
         #region Constructors
-        public ClinicianAssignmentViewModel()
+        public ClinicianAssignmentViewModel() : base()
         {
-            _oAuthService = ((App)Application.Current).oAuthService;
         }
 
 

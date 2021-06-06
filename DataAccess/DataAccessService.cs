@@ -4,16 +4,22 @@ using System.Configuration;
 using System.Threading.Tasks;
 using DataAccess.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace DataAccess
 {
     public class DataAccessService : IDisposable
     {
+
+        #region DataMembers
+
         private string API;
         private bool _disposed = false;
         private RestClient client;
         private string accessToken;
+
+        #endregion
 
         #region Constructors
 
@@ -35,6 +41,11 @@ namespace DataAccess
             RestRequest request = new RestRequest("Users", Method.GET);
             request.AddHeader("authorization", "Bearer " + accessToken);
             IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
             return JsonConvert.DeserializeObject<List<UsersResource>>(response.Content);
         }
 
@@ -44,6 +55,11 @@ namespace DataAccess
             RestRequest request = new RestRequest("Customer/" + usersId.ToString(), Method.GET);
             request.AddHeader("authorization", "Bearer " + accessToken);
             IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
             return JsonConvert.DeserializeObject<CustomerDetailsResource>(response.Content);
         }
 
@@ -52,6 +68,11 @@ namespace DataAccess
             RestRequest request = new RestRequest("Users_Response/users/" + usersId.ToString(), Method.GET);
             request.AddHeader("authorization", "Bearer " + accessToken);
             IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
             return JsonConvert.DeserializeObject<IEnumerable<Users_ResponseResource>>(response.Content);
         }
 
@@ -61,6 +82,11 @@ namespace DataAccess
             RestRequest request = new RestRequest("Clinician/matched/" + usersId.ToString(), Method.GET);
             request.AddHeader("authorization", "Bearer " + accessToken);
             IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
             return JsonConvert.DeserializeObject<IEnumerable<ClinicianResource>>(response.Content);
         }
 
@@ -69,6 +95,11 @@ namespace DataAccess
             RestRequest request = new RestRequest("Clinician/" + usersId.ToString(), Method.GET);
             request.AddHeader("authorization", "Bearer " + accessToken);
             IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
             return JsonConvert.DeserializeObject<ClinicianDetailsResource>(response.Content);
         }
 
@@ -90,6 +121,11 @@ namespace DataAccess
             RestRequest request = new RestRequest("Survey_Page", Method.GET);
             request.AddHeader("authorization", "Bearer " + accessToken);
             IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
             return JsonConvert.DeserializeObject<IEnumerable<Survey_PageDetailsResource>>(response.Content);
         }
 
@@ -99,29 +135,137 @@ namespace DataAccess
             RestRequest request = new RestRequest("Survey_Response", Method.GET);
             request.AddHeader("authorization", "Bearer " + accessToken);
             IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
             return JsonConvert.DeserializeObject<IEnumerable<Survey_ResponseResource>>(response.Content);
         }
 
-        public async Task<IEnumerable<Survey_ResponseResource>> AddSurveyResponse(string survey_ResponseText)
+        public async Task<Survey_ResponseResource> AddSurveyResponse(string survey_ResponseText)
         {
             RestRequest request = new RestRequest("Survey_Response", Method.POST);
             request.AddHeader("authorization", "Bearer " + accessToken);
             Dictionary<string, string> ds = new Dictionary<string, string>();
             ds.Add("responseText", survey_ResponseText);
+            request.AddJsonBody(ds);
             IRestResponse response = await client.ExecuteAsync(request);
-            return JsonConvert.DeserializeObject<IEnumerable<Survey_ResponseResource>>(response.Content);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.Content.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
+            return JsonConvert.DeserializeObject<Survey_ResponseResource>(response.Content);
         }
 
-        public async Task<IEnumerable<Survey_ResponseResource>> DeleteSurveyResponse(int survey_ResponseId)
+        public async Task<Survey_ResponseResource> DeleteSurveyResponse(long survey_ResponseId)
         {
             RestRequest request = new RestRequest("Survey_Response/" + survey_ResponseId.ToString(), Method.DELETE);
             request.AddHeader("authorization", "Bearer " + accessToken);
             IRestResponse response = await client.ExecuteAsync(request);
-            return JsonConvert.DeserializeObject<IEnumerable<Survey_ResponseResource>>(response.Content);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
+            return JsonConvert.DeserializeObject<Survey_ResponseResource>(response.Content);
         }
 
         #endregion
 
+        #region Survey Question
+        public async Task<IEnumerable<Survey_QuestionResource>> GetAllSurveyQuestions()
+        {
+            RestRequest request = new RestRequest("Survey_Question", Method.GET);
+            request.AddHeader("authorization", "Bearer " + accessToken);
+            IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
+            return JsonConvert.DeserializeObject<IEnumerable<Survey_QuestionResource>>(response.Content);
+        }
+
+        public async Task<Survey_QuestionResource> AddSurveyQuestion(string survey_QuestionText)
+        {
+
+            RestRequest request = new RestRequest("Survey_Question", Method.POST);
+            request.AddHeader("authorization", "Bearer " + accessToken);
+            Dictionary<string, string> ds = new Dictionary<string, string>();
+            ds.Add("QuestionText", survey_QuestionText);
+            request.AddJsonBody(ds);
+            IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
+            return JsonConvert.DeserializeObject<Survey_QuestionResource>(response.Content);
+        }
+
+        public async Task<Survey_QuestionResource> DeleteSurveyQuestion(long survey_QuestionId)
+        {
+            RestRequest request = new RestRequest("Survey_Question/" + survey_QuestionId.ToString(), Method.DELETE);
+            request.AddHeader("authorization", "Bearer " + accessToken);
+            IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
+            return JsonConvert.DeserializeObject<Survey_QuestionResource>(response.Content);
+        }
+
+        #endregion
+
+
+        #region Survey Page
+        public async Task<IEnumerable<Survey_PageResource>> GetAllSurveyPages()
+        {
+            RestRequest request = new RestRequest("Survey_Page", Method.GET);
+            request.AddHeader("authorization", "Bearer " + accessToken);
+            IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
+            return JsonConvert.DeserializeObject<IEnumerable<Survey_PageResource>>(response.Content);
+        }
+
+        public async Task<Survey_PageResource> AddSurveyPage(string survey_PageText)
+        {
+
+            RestRequest request = new RestRequest("Survey_Page", Method.POST);
+            request.AddHeader("authorization", "Bearer " + accessToken);
+            Dictionary<string, string> ds = new Dictionary<string, string>();
+            ds.Add("PageText", survey_PageText);
+            request.AddJsonBody(ds);
+            IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
+            return JsonConvert.DeserializeObject<Survey_PageResource>(response.Content);
+        }
+
+        public async Task<Survey_PageResource> DeleteSurveyPage(long survey_PageId)
+        {
+            RestRequest request = new RestRequest("Survey_Page/" + survey_PageId.ToString(), Method.DELETE);
+            request.AddHeader("authorization", "Bearer " + accessToken);
+            IRestResponse response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessful)
+            {
+                JObject json = JObject.Parse(response.ErrorException.ToString());
+                throw new Exception(json["detail"].ToString());
+            }
+            return JsonConvert.DeserializeObject<Survey_PageResource>(response.Content);
+        }
+
+        #endregion
         #endregion
 
 

@@ -14,20 +14,36 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ToolBar Height="32" VerticalAlignment="Top">
-            <TextBlock Text="Welcome " VerticalAlignment="Center" />
-            <TextBlock x:Name="Welcometxt" Text="{Binding service.userName}" Width="160" VerticalAlignment="Center" />
-            <Button Content="Log Out" Click="Logoutbtn_Click"  x:Name="Logoutbtn" VerticalAlignment="Center" HorizontalAlignment="Right" Height="22"/>
+        <ToolBar Height="40" VerticalAlignment="Top">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Welcome " Grid.Column="0" VerticalAlignment="Center" />
+                <TextBlock x:Name="Welcometxt"  Grid.Column="1" Text="{Binding service.userName}" VerticalAlignment="Center" />
+                <Button Content="Log Out" Grid.Column="2" Click="Logoutbtn_Click"  x:Name="Logoutbtn" Style="{StaticResource SmallRoundedOrangeButton}" Width="100" VerticalAlignment="Center"  Height="25"/>
+
+            </Grid>
         </ToolBar>
 
         <telerik:RadTabControl x:Name="TabControl" Margin="0,34, 0, 0">
             <telerik:RadTabItem Header="Change Survey Questions">
                 <StackPanel>
-                    <Button Name="LoadSurveyPagebtn" Content="Load Survey Page Data" Click="LoadSurveyPagebtn_Click"/>
-                    <Button Name="ManageAllResponsesbtn" Content="Manage All Survey Responses" Click="ManageAllResponsesbtn_Click"/>
-                    <Button Name="ManageAllQuestionsbtn" Content="Manage All Survey Questions" Click="ManageAllQuestionsbtn_Click"/>
-                    <Button Name="ManageAllPagesbtn" Content="Manage All Survey Pages" Click="ManageAllPagesbtn_Click" />
-                    <telerik:RadGridView RowDetailsVisibilityChanged="SurveyPageGV_RowDetailsVisibilityChanged"  MouseRightButtonUp="SurveyPageGV_MouseRightButtonDown"  ShowGroupPanel="False" Name="SurveyPageGV"  MaxHeight="460" RowDetailsVisibilityMode="VisibleWhenSelected"  CanUserGroupColumns="False"  GroupRenderMode="Flat" IsFilteringAllowed="False" AutoGenerateColumns="False" ItemsSource="{Binding SurveyPageDetails}">
+                    <Grid Margin="0,10,0,10" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="LoadSurveyPagebtn" Grid.Column="0" Width="190" Margin="0,0,5,0"  Style="{StaticResource SmallRoundedOrangeButton}" Content="Load Survey Page Data" Click="LoadSurveyPagebtn_Click"/>
+                        <Button Name="ManageAllResponsesbtn" Grid.Column="1" Width="190"  Margin="0,0,5,0"   Style="{StaticResource SmallRoundedOrangeButton}" Content="Manage All Survey Responses" Click="ManageAllResponsesbtn_Click"/>
+                        <Button Name="ManageAllQuestionsbtn" Grid.Column="2" Width="190"  Margin="0,0,5,0"   Style="{StaticResource SmallRoundedOrangeButton}"  Content="Manage All Survey Questions" Click="ManageAllQuestionsbtn_Click"/>
+                        <Button Name="ManageAllPagesbtn" Grid.Column="3" Width="190"  Margin="0,0,5,0"   Style="{StaticResource SmallRoundedOrangeButton}" Content="Manage All Survey Pages" Click="ManageAllPagesbtn_Click" />
+                    </Grid>
+                    <telerik:RadGridView RowDetailsVisibilityChanged="SurveyPageGV_RowDetailsVisibilityChanged"  MouseRightButtonUp="SurveyPageGV_MouseRightButtonDown"  ShowGroupPanel="False" Name="SurveyPageGV"  MaxHeight="460" RowDetailsVisibilityMode="VisibleWhenSelected"  CanUserGroupColumns="False"  GroupRenderMode="Flat" IsFilteringAllowed="False" AutoGenerateColumns="False" ItemsSource="{Binding SurveyPageDetails}" telerik:StyleManager.Theme="VisualStudio2019">
                         <telerik:RadContextMenu.ContextMenu>
                             <telerik:RadContextMenu Name="PageContextMenu">
                                 <telerik:RadMenuItem Name="EditPageContext" Header="Edit Page" Click="EditPageContext_Click" />

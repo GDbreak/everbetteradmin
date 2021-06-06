@@ -225,12 +225,18 @@ namespace EverBetterAdminApp.View
 
         private void ManageAllQuestionsbtn_Click(object sender, RoutedEventArgs e)
         {
+            ManageSurveyQuestionsWindow wnd = new ManageSurveyQuestionsWindow();
 
+            wnd.Owner = this;
+            wnd.ShowDialog();
         }
 
         private void ManageAllPagesbtn_Click(object sender, RoutedEventArgs e)
         {
+            ManageSurveyPagesWindow wnd = new ManageSurveyPagesWindow();
 
+            wnd.Owner = this;
+            wnd.ShowDialog();
         }
     }
 }
