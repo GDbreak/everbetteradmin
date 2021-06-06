@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EverBetterAdminApp.ViewModel
 {
-    public class ManageSurveyResponseViewModel : BaseViewModel
+    public class EditSurveyResponseViewModel : BaseViewModel
     {
 
     }

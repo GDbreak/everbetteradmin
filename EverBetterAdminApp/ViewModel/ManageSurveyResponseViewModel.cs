@@ -1,26 +1,30 @@
-﻿using DataAccess.Models;
+﻿using DataAccess;
+using DataAccess.Models;
 using EverBetterAdminApp.Helpers;
+using EverBetterAdminApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace EverBetterAdminApp.ViewModel
 {
 
 
-    public class EditSurveyResponseViewModel : BaseViewModel
+    public class ManageSurveyResponsesViewModel : BaseViewModel
     {
         #region DataMembers
-
+        private OAuthService _oAuthService;
         private IEnumerable<Survey_ResponseResource> _survey_Responses;
 
         #endregion
 
         #region Constructors
 
-        public EditSurveyResponseViewModel()
+        public ManageSurveyResponsesViewModel()
         {
-
+            _oAuthService = ((App)Application.Current).oAuthService;
 
         }
 
@@ -47,6 +51,38 @@ namespace EverBetterAdminApp.ViewModel
         #endregion
 
         #region Methods
+
+        public async Task GetAllSurveyResponses()
+        {
+
+            using (DataAccessService das = new DataAccessService(_oAuthService.accessToken))
+            {
+                _survey_Responses = await das.GetAllSurveyResponses();
+                return;
+            }
+        }
+
+        public async Task AddSurveyResponse(string survey_ResponseText)
+        {
+
+            using (DataAccessService das = new DataAccessService(_oAuthService.accessToken))
+            {
+                _survey_Responses = await das.AddSurveyResponse(survey_ResponseText);
+                await GetAllSurveyResponses();
+                return;
+            }
+        }
+
+        public async Task DeleteSurveyResponse(int survey_ResponseId)
+        {
+
+            using (DataAccessService das = new DataAccessService(_oAuthService.accessToken))
+            {
+                _survey_Responses = await das.DeleteSurveyResponse(survey_ResponseId);
+                await GetAllSurveyResponses();
+                return;
+            }
+        }
 
         #endregion
 

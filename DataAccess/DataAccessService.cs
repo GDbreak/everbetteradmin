@@ -93,6 +93,35 @@ namespace DataAccess
             return JsonConvert.DeserializeObject<IEnumerable<Survey_PageDetailsResource>>(response.Content);
         }
 
+        #region Survey Response
+        public async Task<IEnumerable<Survey_ResponseResource>> GetAllSurveyResponses()
+        {
+            RestRequest request = new RestRequest("Survey_Response", Method.GET);
+            request.AddHeader("authorization", "Bearer " + accessToken);
+            IRestResponse response = await client.ExecuteAsync(request);
+            return JsonConvert.DeserializeObject<IEnumerable<Survey_ResponseResource>>(response.Content);
+        }
+
+        public async Task<IEnumerable<Survey_ResponseResource>> AddSurveyResponse(string survey_ResponseText)
+        {
+            RestRequest request = new RestRequest("Survey_Response", Method.POST);
+            request.AddHeader("authorization", "Bearer " + accessToken);
+            Dictionary<string, string> ds = new Dictionary<string, string>();
+            ds.Add("responseText", survey_ResponseText);
+            IRestResponse response = await client.ExecuteAsync(request);
+            return JsonConvert.DeserializeObject<IEnumerable<Survey_ResponseResource>>(response.Content);
+        }
+
+        public async Task<IEnumerable<Survey_ResponseResource>> DeleteSurveyResponse(int survey_ResponseId)
+        {
+            RestRequest request = new RestRequest("Survey_Response/" + survey_ResponseId.ToString(), Method.DELETE);
+            request.AddHeader("authorization", "Bearer " + accessToken);
+            IRestResponse response = await client.ExecuteAsync(request);
+            return JsonConvert.DeserializeObject<IEnumerable<Survey_ResponseResource>>(response.Content);
+        }
+
+        #endregion
+
         #endregion
 
 

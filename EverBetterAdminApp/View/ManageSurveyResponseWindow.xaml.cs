@@ -21,28 +21,29 @@ namespace EverBetterAdminApp.View
     {
         #region DataMembers
 
-        private ManageSurveyResponseViewModel viewModel;
+        private ManageSurveyResponsesViewModel viewModel;
         #endregion
 
         #region Constructors
         public ManageSurveyResponseWindow()
         {
             InitializeComponent();
-            viewModel = (ManageSurveyResponseViewModel)base.DataContext;
+            viewModel = (ManageSurveyResponsesViewModel)base.DataContext;
+            viewModel.GetAllSurveyResponses();
         }
 
         #endregion
 
         #region Events
 
-        private void DeleteResponse_Click(object sender, RoutedEventArgs e)
+        private async void DeleteResponse_Click(object sender, RoutedEventArgs e)
         {
-
+            //await viewModel.DeleteSurveyResponse(Responsetxt.Text);
         }
 
-        private void CreateResponse_Click(object sender, RoutedEventArgs e)
+        private async void CreateResponse_Click(object sender, RoutedEventArgs e)
         {
-
+            await viewModel.AddSurveyResponse(Responsetxt.Text);
         }
 
         #endregion
