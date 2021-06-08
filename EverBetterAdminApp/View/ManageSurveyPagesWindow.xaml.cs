@@ -61,7 +61,7 @@ namespace EverBetterAdminApp.View
                     {
                         if (messageBoxResult == MessageBoxResult.Yes)
 
-                            await viewModel.AddSurveyPage(Pagetxt.Text);
+                            await viewModel.AddSurveyPage(Pagetxt.Text, 0);
 
                     }
                 }

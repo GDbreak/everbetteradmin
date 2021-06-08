@@ -60,12 +60,12 @@ namespace EverBetterAdminApp.ViewModel
             }
         }
 
-        public async Task AddSurveyPage(string survey_PageText)
+        public async Task AddSurveyPage(string survey_PageText, int sortOrder)
         {
 
             using (DataAccessService das = new DataAccessService(_oAuthService.accessToken))
             {
-                Survey_PageResource srr = await das.AddSurveyPage(survey_PageText);
+                Survey_PageResource srr = await das.AddSurveyPage(survey_PageText, sortOrder);
                 MessageBox.Show("Successfully added " + srr.Header);
                 
                 await GetAllSurveyPages();

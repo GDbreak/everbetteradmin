@@ -116,7 +116,7 @@ namespace EverBetterAdminApp.View
         private async void LoadSurveyPagebtn_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
-
+            btn.Background = (Brush)Application.Current.TryFindResource("PurpleBrush");
             btn.IsEnabled = false;
             btn.Content = "Loading...";
 

@@ -43,7 +43,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<List<UsersResource>>(response.Content);
@@ -57,7 +57,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<CustomerDetailsResource>(response.Content);
@@ -70,7 +70,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<IEnumerable<Users_ResponseResource>>(response.Content);
@@ -84,7 +84,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<IEnumerable<ClinicianResource>>(response.Content);
@@ -97,7 +97,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<ClinicianDetailsResource>(response.Content);
@@ -123,7 +123,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<IEnumerable<Survey_PageDetailsResource>>(response.Content);
@@ -137,7 +137,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<IEnumerable<Survey_ResponseResource>>(response.Content);
@@ -166,7 +166,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<Survey_ResponseResource>(response.Content);
@@ -182,7 +182,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<IEnumerable<Survey_QuestionResource>>(response.Content);
@@ -199,7 +199,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<Survey_QuestionResource>(response.Content);
@@ -212,7 +212,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<Survey_QuestionResource>(response.Content);
@@ -229,24 +229,25 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<IEnumerable<Survey_PageResource>>(response.Content);
         }
 
-        public async Task<Survey_PageResource> AddSurveyPage(string survey_PageText)
+        public async Task<Survey_PageResource> AddSurveyPage(string survey_PageText, int sortOrder)
         {
 
             RestRequest request = new RestRequest("Survey_Page", Method.POST);
             request.AddHeader("authorization", "Bearer " + accessToken);
             Dictionary<string, string> ds = new Dictionary<string, string>();
-            ds.Add("PageText", survey_PageText);
+            ds.Add("header", survey_PageText);
+            ds.Add("header", survey_PageText);
             request.AddJsonBody(ds);
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<Survey_PageResource>(response.Content);
@@ -259,7 +260,7 @@ namespace DataAccess
             IRestResponse response = await client.ExecuteAsync(request);
             if (!response.IsSuccessful)
             {
-                JObject json = JObject.Parse(response.ErrorException.ToString());
+                JObject json = JObject.Parse(response.Content.ToString());
                 throw new Exception(json["detail"].ToString());
             }
             return JsonConvert.DeserializeObject<Survey_PageResource>(response.Content);

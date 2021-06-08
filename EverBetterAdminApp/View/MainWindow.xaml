@@ -38,10 +38,10 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Button Name="LoadSurveyPagebtn" Grid.Column="0" Width="190" Margin="0,0,5,0"  Style="{StaticResource SmallRoundedOrangeButton}" Content="Load Survey Page Data" Click="LoadSurveyPagebtn_Click"/>
-                        <Button Name="ManageAllResponsesbtn" Grid.Column="1" Width="190"  Margin="0,0,5,0"   Style="{StaticResource SmallRoundedOrangeButton}" Content="Manage All Survey Responses" Click="ManageAllResponsesbtn_Click"/>
-                        <Button Name="ManageAllQuestionsbtn" Grid.Column="2" Width="190"  Margin="0,0,5,0"   Style="{StaticResource SmallRoundedOrangeButton}"  Content="Manage All Survey Questions" Click="ManageAllQuestionsbtn_Click"/>
-                        <Button Name="ManageAllPagesbtn" Grid.Column="3" Width="190"  Margin="0,0,5,0"   Style="{StaticResource SmallRoundedOrangeButton}" Content="Manage All Survey Pages" Click="ManageAllPagesbtn_Click" />
+                        <Button Name="LoadSurveyPagebtn" Grid.Column="0" Width="190" Height="20" Margin="0,0,5,0"  Style="{StaticResource SmallRoundedOrangeButton}" Content="Load Survey Page Data" Click="LoadSurveyPagebtn_Click"/>
+                        <Button Name="ManageAllResponsesbtn" Grid.Column="1" Width="190" Height="20"  Margin="0,0,5,0"   Style="{StaticResource SmallRoundedOrangeButton}" Content="Manage All Survey Responses" Click="ManageAllResponsesbtn_Click"/>
+                        <Button Name="ManageAllQuestionsbtn" Grid.Column="2" Width="190" Height="20"  Margin="0,0,5,0"   Style="{StaticResource SmallRoundedOrangeButton}"  Content="Manage All Survey Questions" Click="ManageAllQuestionsbtn_Click"/>
+                        <Button Name="ManageAllPagesbtn" Grid.Column="3" Width="190" Height="20"  Margin="0,0,5,0"   Style="{StaticResource SmallRoundedOrangeButton}" Content="Manage All Survey Pages" Click="ManageAllPagesbtn_Click" />
                     </Grid>
                     <telerik:RadGridView RowDetailsVisibilityChanged="SurveyPageGV_RowDetailsVisibilityChanged"  MouseRightButtonUp="SurveyPageGV_MouseRightButtonDown"  ShowGroupPanel="False" Name="SurveyPageGV"  MaxHeight="460" RowDetailsVisibilityMode="VisibleWhenSelected"  CanUserGroupColumns="False"  GroupRenderMode="Flat" IsFilteringAllowed="False" AutoGenerateColumns="False" ItemsSource="{Binding SurveyPageDetails}" telerik:StyleManager.Theme="VisualStudio2019">
                         <telerik:RadContextMenu.ContextMenu>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EverBetterAdminApp.View"
         xmlns:viewmodel="clr-namespace:EverBetterAdminApp.ViewModel"
         mc:Ignorable="d"
-        Title="Manage Survey Questions" Height="450" ResizeMode="NoResize" Width="420"  Style="{StaticResource WinAll}"> 
+        Title="Manage Survey Questions" Height="450" ResizeMode="NoResize" Width="1000"  Style="{StaticResource WinAll}"> 
     <Window.DataContext>
         <viewmodel:ManageSurveyQuestionsViewModel />
     </Window.DataContext>
@@ -19,7 +19,7 @@
         <StackPanel Margin="0,0,-400,0" Grid.RowSpan="3">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <TextBlock Margin="5,0,0,0" Text="Question: " />
-                <TextBox Margin="5,0,5,0" Name="Questiontxt" Width="140"></TextBox>
+                <TextBox Margin="5,0,5,0" Name="Questiontxt" Width="600"></TextBox>
                 <Button Margin="5,0,5,0" Style="{StaticResource SmallRoundedOrangeButton}" Width="150" Name="Createbtn" Click="CreateQuestion_Click" Content="Create Question"></Button>
             </StackPanel>
             <TextBlock Margin="5,0,5,0"  Text="Active Questions:"/>
