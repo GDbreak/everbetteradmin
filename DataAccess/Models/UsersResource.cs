@@ -64,7 +64,7 @@ namespace DataAccess.Models
         /// <summary>
         /// The user's date of birth.
         /// </summary>
-        public DateTime DateofBirth { get; set; }
+        public DateTime? DateofBirth { get; set; }
         /// <summary>
         /// The user's phone number.
         /// </summary>

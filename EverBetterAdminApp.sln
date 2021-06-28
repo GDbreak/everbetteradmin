@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EverBetterAdminApp", "EverB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{B109C940-A4D6-49F4-A5C5-AD8D645965DE}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{EE84828F-F609-409F-9AC0-5BA0C204AD75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{B109C940-A4D6-49F4-A5C5-AD8D645965DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B109C940-A4D6-49F4-A5C5-AD8D645965DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B109C940-A4D6-49F4-A5C5-AD8D645965DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE84828F-F609-409F-9AC0-5BA0C204AD75}.Debug|Any CPU.ActiveCfg = Debug
+		{EE84828F-F609-409F-9AC0-5BA0C204AD75}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

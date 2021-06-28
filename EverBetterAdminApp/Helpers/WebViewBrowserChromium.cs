@@ -1,9 +1,12 @@
 ﻿using IdentityModel.OidcClient.Browser;
+using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
 using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Environment;
 
 namespace EverBetterAdminApp.Helpers
 {
@@ -37,7 +40,9 @@ namespace EverBetterAdminApp.Helpers
                 Name = "WebAuthentication",
                 Text = title,
                 Width = width,
-                Height = height
+                Height = height,
+                
+                
             })
         {
         }
@@ -49,7 +54,11 @@ namespace EverBetterAdminApp.Helpers
 
             var window = _formFactory();
             var webView = new WebView2 { Dock = DockStyle.Fill };
-            await webView.EnsureCoreWebView2Async();
+            var commonpath = GetFolderPath(SpecialFolder.CommonApplicationData);
+            var path = Path.Combine(commonpath, "EverBetter Health LLC\\EverBetter Admin App");
+
+            var env = await CoreWebView2Environment.CreateAsync(null, path, null);
+            await webView.EnsureCoreWebView2Async(env);
 
             webView.NavigationStarting += (sender, e) =>
             {
